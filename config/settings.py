@@ -1,3 +1,4 @@
+<<<<<<< Updated upstream
 """
 Django settings for config project.
 
@@ -9,6 +10,9 @@ https://docs.djangoproject.com/en/4.0/topics/settings/
 For the full list of settings and their values, see
 https://docs.djangoproject.com/en/4.0/ref/settings/
 """
+=======
+
+>>>>>>> Stashed changes
 
 from pathlib import Path
 
