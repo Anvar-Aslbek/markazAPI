@@ -17,4 +17,7 @@ class Employee(User):
 
     def __str__(self):
         return self.first_name
+    
+    class Meta:
+        verbose_name = "Xodimlar"
 
