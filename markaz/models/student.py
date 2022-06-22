@@ -16,7 +16,7 @@ class Student(User):
     come_date = models.DateField(auto_now_add=True)
 
     def __str__(self):
-        return self.first_name
+        return self.username
 
     class Meta:
         verbose_name = "Student"

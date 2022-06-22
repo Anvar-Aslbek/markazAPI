@@ -8,6 +8,7 @@ from django.http import Http404
 from .serializers import *
 from .models import *
 
+
 # Create your views here.
 class StudentListApiView(ListAPIView):
     queryset = Student.objects.all()
@@ -22,9 +23,9 @@ class StudentListApiView(ListAPIView):
 class StudentAPIView(APIView):
     def get(self, request):
         students = Student.objects.all()
-        serializer = StudentSerializer(students, many = True)
+        serializer = StudentSerializer(students, many=True)
         return Response(serializer.data)
-    
+
     def post(self, request):
         serializer = StudentSerializer(data=request.data)
         if serializer.is_valid():
@@ -32,34 +33,33 @@ class StudentAPIView(APIView):
             return Response(serializer.data, status=status.HTTP_201_CREATED)
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
+
 class StudentDetailAPIViews(APIView):
     # permission_classes = [permissions.IsAuthenticated]
 
-    def get_object(self,pk):
+    def get_object(self, pk):
         try:
             return Student.objects.get(pk=pk)
         except:
             raise Http404
-    
-    def get(self,request, pk):
+
+    def get(self, request, pk):
         student = self.get_object(pk)
         serializer = StudentSerializer(student)
         return Response(serializer.data)
-    
+
     def put(self, request, pk):
         student = self.get_object(pk)
-        serializer = StudentSerializer(student, data = request.data)
+        serializer = StudentSerializer(student, data=request.data)
         if serializer.is_valid():
             serializer.save()
             return Response(serializer.data)
-        return Response(serializer.errors, status = status.HTTP_400_BAD_REQUEST)
-    
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
     def delete(self, request, pk):
         student = self.get_object(pk)
         student.delete()
         return Response(status=status.HTTP_204_NO_CONTENT)
-    
-
 
 
 class EmployeeListApiView(ListAPIView):
@@ -71,28 +71,29 @@ class EmployeeListApiView(ListAPIView):
         serializer = XodimSerializer(queryset, many=True)
         return Response(serializer.data)
 
+
 class EmployeeDetailAPIViews(APIView):
     # permission_classes = [permissions.IsAuthenticated]
 
-    def get_object(self,pk):
+    def get_object(self, pk):
         try:
             return Employee.objects.get(pk=pk)
         except:
             raise Http404
-    
-    def get(self,request, pk):
+
+    def get(self, request, pk):
         student = self.get_object(pk)
         serializer = XodimSerializer(student)
         return Response(serializer.data)
-    
+
     def put(self, request, pk):
         student = self.get_object(pk)
-        serializer = XodimSerializer(student, data = request.data)
+        serializer = XodimSerializer(student, data=request.data)
         if serializer.is_valid():
             serializer.save()
             return Response(serializer.data)
-        return Response(serializer.errors, status = status.HTTP_400_BAD_REQUEST)
-    
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
     def delete(self, request, pk):
         student = self.get_object(pk)
         student.delete()
@@ -108,28 +109,29 @@ class CourseListApiView(ListAPIView):
         serializer = CourseSerializer(queryset, many=True)
         return Response(serializer.data)
 
+
 class CourseDetailAPIViews(APIView):
     # permission_classes = [permissions.IsAuthenticated]
 
-    def get_object(self,pk):
+    def get_object(self, pk):
         try:
             return Course.objects.get(pk=pk)
         except:
             raise Http404
-    
-    def get(self,request, pk):
+
+    def get(self, request, pk):
         student = self.get_object(pk)
         serializer = CourseSerializer(student)
         return Response(serializer.data)
-    
+
     def put(self, request, pk):
         student = self.get_object(pk)
-        serializer = CourseSerializer(student, data = request.data)
+        serializer = CourseSerializer(student, data=request.data)
         if serializer.is_valid():
             serializer.save()
             return Response(serializer.data)
-        return Response(serializer.errors, status = status.HTTP_400_BAD_REQUEST)
-    
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
     def delete(self, request, pk):
         student = self.get_object(pk)
         student.delete()
@@ -145,28 +147,29 @@ class DayListApiView(ListAPIView):
         serializer = DaySerializer(queryset, many=True)
         return Response(serializer.data)
 
+
 class DayDetailAPIViews(APIView):
     # permission_classes = [permissions.IsAuthenticated]
 
-    def get_object(self,pk):
+    def get_object(self, pk):
         try:
             return Day.objects.get(pk=pk)
         except:
             raise Http404
-    
-    def get(self,request, pk):
+
+    def get(self, request, pk):
         student = self.get_object(pk)
         serializer = DaySerializer(student)
         return Response(serializer.data)
-    
+
     def put(self, request, pk):
         student = self.get_object(pk)
-        serializer = DaySerializer(student, data = request.data)
+        serializer = DaySerializer(student, data=request.data)
         if serializer.is_valid():
             serializer.save()
             return Response(serializer.data)
-        return Response(serializer.errors, status = status.HTTP_400_BAD_REQUEST)
-    
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
     def delete(self, request, pk):
         student = self.get_object(pk)
         student.delete()
@@ -182,28 +185,29 @@ class XarajatListApiView(ListAPIView):
         serializer = XarajatSerializer(queryset, many=True)
         return Response(serializer.data)
 
+
 class XarajatDetailAPIViews(APIView):
     # permission_classes = [permissions.IsAuthenticated]
 
-    def get_object(self,pk):
+    def get_object(self, pk):
         try:
             return Xarajat.objects.get(pk=pk)
         except:
             raise Http404
-    
-    def get(self,request, pk):
+
+    def get(self, request, pk):
         student = self.get_object(pk)
         serializer = XarajatSerializer(student)
         return Response(serializer.data)
-    
+
     def put(self, request, pk):
         student = self.get_object(pk)
-        serializer = XarajatSerializer(student, data = request.data)
+        serializer = XarajatSerializer(student, data=request.data)
         if serializer.is_valid():
             serializer.save()
             return Response(serializer.data)
-        return Response(serializer.errors, status = status.HTTP_400_BAD_REQUEST)
-    
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
     def delete(self, request, pk):
         student = self.get_object(pk)
         student.delete()
@@ -219,28 +223,29 @@ class HarajatTuriListApiView(ListAPIView):
         serializer = HarajatturiSerializer(queryset, many=True)
         return Response(serializer.data)
 
+
 class HarajatTuriDetailAPIViews(APIView):
     # permission_classes = [permissions.IsAuthenticated]
 
-    def get_object(self,pk):
+    def get_object(self, pk):
         try:
             return Harajatturi.objects.get(pk=pk)
         except:
             raise Http404
-    
-    def get(self,request, pk):
+
+    def get(self, request, pk):
         student = self.get_object(pk)
         serializer = HarajatturiSerializer(student)
         return Response(serializer.data)
-    
+
     def put(self, request, pk):
         student = self.get_object(pk)
-        serializer = HarajatturiSerializer(student, data = request.data)
+        serializer = HarajatturiSerializer(student, data=request.data)
         if serializer.is_valid():
             serializer.save()
             return Response(serializer.data)
-        return Response(serializer.errors, status = status.HTTP_400_BAD_REQUEST)
-    
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
     def delete(self, request, pk):
         student = self.get_object(pk)
         student.delete()
@@ -257,6 +262,34 @@ class IshHaqqiTuriListApiView(ListAPIView):
         return Response(serializer.data)
 
 
+class IshHaqqiTuriDetailAPIViews(APIView):
+    # permission_classes = [permissions.IsAuthenticated]
+
+    def get_object(self, pk):
+        try:
+            return IshHaqqiTuri.objects.get(pk=pk)
+        except:
+            raise Http404
+
+    def get(self, request, pk):
+        student = self.get_object(pk)
+        serializer = IshHaqqiTuriSerializer(student)
+        return Response(serializer.data)
+
+    def put(self, request, pk):
+        student = self.get_object(pk)
+        serializer = IshHaqqiTuriSerializer(student, data=request.data)
+        if serializer.is_valid():
+            serializer.save()
+            return Response(serializer.data)
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
+    def delete(self, request, pk):
+        student = self.get_object(pk)
+        student.delete()
+        return Response(status=status.HTTP_204_NO_CONTENT)
+
+
 class IshHaqqiListApiView(ListAPIView):
     queryset = IshHaqqi.objects.all()
     serializer_class = IshHaqqiSerializer
@@ -265,6 +298,34 @@ class IshHaqqiListApiView(ListAPIView):
         queryset = self.get_queryset()
         serializer = IshHaqqiSerializer(queryset, many=True)
         return Response(serializer.data)
+
+
+class IshHaqqiDetailAPIViews(APIView):
+    # permission_classes = [permissions.IsAuthenticated]
+
+    def get_object(self, pk):
+        try:
+            return IshHaqqi.objects.get(pk=pk)
+        except:
+            raise Http404
+
+    def get(self, request, pk):
+        student = self.get_object(pk)
+        serializer = IshHaqqiSerializer(student)
+        return Response(serializer.data)
+
+    def put(self, request, pk):
+        student = self.get_object(pk)
+        serializer = IshHaqqiSerializer(student, data=request.data)
+        if serializer.is_valid():
+            serializer.save()
+            return Response(serializer.data)
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
+    def delete(self, request, pk):
+        student = self.get_object(pk)
+        student.delete()
+        return Response(status=status.HTTP_204_NO_CONTENT)
 
 
 class PaymentListApiView(ListAPIView):
@@ -277,6 +338,34 @@ class PaymentListApiView(ListAPIView):
         return Response(serializer.data)
 
 
+class PaymentDetailAPIViews(APIView):
+    # permission_classes = [permissions.IsAuthenticated]
+
+    def get_object(self, pk):
+        try:
+            return Payment.objects.get(pk=pk)
+        except:
+            raise Http404
+
+    def get(self, request, pk):
+        student = self.get_object(pk)
+        serializer = PaymentSerializer(student)
+        return Response(serializer.data)
+
+    def put(self, request, pk):
+        student = self.get_object(pk)
+        serializer = PaymentSerializer(student, data=request.data)
+        if serializer.is_valid():
+            serializer.save()
+            return Response(serializer.data)
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
+    def delete(self, request, pk):
+        student = self.get_object(pk)
+        student.delete()
+        return Response(status=status.HTTP_204_NO_CONTENT)
+
+
 class RollListApiView(ListAPIView):
     queryset = Roll.objects.all()
     serializer_class = RollSerializer
@@ -285,6 +374,34 @@ class RollListApiView(ListAPIView):
         queryset = self.get_queryset()
         serializer = RollSerializer(queryset, many=True)
         return Response(serializer.data)
+
+
+class RollDetailAPIViews(APIView):
+    # permission_classes = [permissions.IsAuthenticated]
+
+    def get_object(self, pk):
+        try:
+            return Roll.objects.get(pk=pk)
+        except:
+            raise Http404
+
+    def get(self, request, pk):
+        student = self.get_object(pk)
+        serializer = RollSerializer(student)
+        return Response(serializer.data)
+
+    def put(self, request, pk):
+        student = self.get_object(pk)
+        serializer = RollSerializer(student, data=request.data)
+        if serializer.is_valid():
+            serializer.save()
+            return Response(serializer.data)
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
+    def delete(self, request, pk):
+        student = self.get_object(pk)
+        student.delete()
+        return Response(status=status.HTTP_204_NO_CONTENT)
 
 
 class RoomListApiView(ListAPIView):
@@ -297,6 +414,34 @@ class RoomListApiView(ListAPIView):
         return Response(serializer.data)
 
 
+class RoomDetailAPIViews(APIView):
+    # permission_classes = [permissions.IsAuthenticated]
+
+    def get_object(self, pk):
+        try:
+            return Room.objects.get(pk=pk)
+        except:
+            raise Http404
+
+    def get(self, request, pk):
+        student = self.get_object(pk)
+        serializer = RoomSerializer(student)
+        return Response(serializer.data)
+
+    def put(self, request, pk):
+        student = self.get_object(pk)
+        serializer = RoomSerializer(student, data=request.data)
+        if serializer.is_valid():
+            serializer.save()
+            return Response(serializer.data)
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
+    def delete(self, request, pk):
+        student = self.get_object(pk)
+        student.delete()
+        return Response(status=status.HTTP_204_NO_CONTENT)
+
+
 class XarajatListApiView(ListAPIView):
     queryset = Xarajat.objects.all()
     serializer_class = XarajatSerializer
@@ -307,3 +452,29 @@ class XarajatListApiView(ListAPIView):
         return Response(serializer.data)
 
 
+class XarajatDetailAPIViews(APIView):
+    # permission_classes = [permissions.IsAuthenticated]
+
+    def get_object(self, pk):
+        try:
+            return Xarajat.objects.get(pk=pk)
+        except:
+            raise Http404
+
+    def get(self, request, pk):
+        student = self.get_object(pk)
+        serializer = XarajatSerializer(student)
+        return Response(serializer.data)
+
+    def put(self, request, pk):
+        student = self.get_object(pk)
+        serializer = XarajatSerializer(student, data=request.data)
+        if serializer.is_valid():
+            serializer.save()
+            return Response(serializer.data)
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
+    def delete(self, request, pk):
+        student = self.get_object(pk)
+        student.delete()
+        return Response(status=status.HTTP_204_NO_CONTENT)
