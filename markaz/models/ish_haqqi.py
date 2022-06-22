@@ -8,4 +8,4 @@ class IshHaqqi(models.Model):
     ish_haqqi_turi = models.ForeignKey('IshHaqqiTuri', on_delete=models.SET_NULL, null=True)
 
     def __str__(self):
-        return self.cource
+        return f"{self.cource}"
