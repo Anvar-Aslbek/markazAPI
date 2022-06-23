@@ -22,6 +22,7 @@ urlpatterns = [
     path('api-auth/', include('rest_framework.urls')),
     path('', include("markaz.urls")),
 
+    path('api-auth/', include("rest_framework.urls")),
     path('doc/', schema_view.with_ui('swagger'), name='swagger_doc'),
 ]
 

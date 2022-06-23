@@ -3,11 +3,13 @@ from .views import *
 
 urlpatterns = [
     path('student/', StudentAPIView.as_view()),
-    path('detail/student/<int:pk>', StudentDetailAPIViews.as_view()),
+    path('student/<int:pk>', StudentDetailAPIViews.as_view()),
     path('', StudentListApiView.as_view()),
     path('xodim/', EmployeeListApiView.as_view()),
     path('course/', CourseListApiView.as_view()),
     path('day/', DayListApiView.as_view()),
+    path('group/', GroupListApiView.as_view()),
+    path('group/<int:pk>', GroupDetailAPIViews.as_view()),
     path('xarajat/', XarajatListApiView.as_view()),
     path('harajat-turi/', HarajatTuriListApiView.as_view()),
     path('ish-haqqi-turi/', IshHaqqiTuriListApiView.as_view()),

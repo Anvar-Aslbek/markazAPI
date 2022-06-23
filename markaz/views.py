@@ -5,12 +5,16 @@ from rest_framework.response import Response
 from rest_framework import status
 from django.http import Http404
 
+from rest_framework import permissions
+from .permissions import ReadOnly
+
 from .serializers import *
 from .models import *
 
 
 # Create your views here.
 class StudentListApiView(ListAPIView):
+    permission_classes = (permissions.IsAuthenticated,)
     queryset = Student.objects.all()
     serializer_class = StudentSerializer
 
@@ -21,6 +25,7 @@ class StudentListApiView(ListAPIView):
 
 
 class StudentAPIView(APIView):
+    permission_classes = (permissions.IsAuthenticated,)
     def get(self, request):
         students = Student.objects.all()
         serializer = StudentSerializer(students, many=True)
@@ -36,6 +41,7 @@ class StudentAPIView(APIView):
 
 class StudentDetailAPIViews(APIView):
     # permission_classes = [permissions.IsAuthenticated]
+    permission_classes = (permissions.IsAuthenticated,)
 
     def get_object(self, pk):
         try:
@@ -63,6 +69,7 @@ class StudentDetailAPIViews(APIView):
 
 
 class EmployeeListApiView(ListAPIView):
+    permission_classes = (permissions.IsAuthenticated,)
     queryset = Employee.objects.all()
     serializer_class = XodimSerializer
 
@@ -74,6 +81,7 @@ class EmployeeListApiView(ListAPIView):
 
 class EmployeeDetailAPIViews(APIView):
     # permission_classes = [permissions.IsAuthenticated]
+    # permission_classes = (permissions.IsAuthenticated,)
 
     def get_object(self, pk):
         try:
@@ -165,6 +173,42 @@ class DayDetailAPIViews(APIView):
     def put(self, request, pk):
         student = self.get_object(pk)
         serializer = DaySerializer(student, data=request.data)
+        if serializer.is_valid():
+            serializer.save()
+            return Response(serializer.data)
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
+    def delete(self, request, pk):
+        student = self.get_object(pk)
+        student.delete()
+        return Response(status=status.HTTP_204_NO_CONTENT)
+
+class GroupListApiView(ListAPIView):
+    queryset = Group.objects.all()
+    serializer_class = GroupSerializer
+
+    def list(self, request):
+        queryset = self.get_queryset()
+        serializer = GroupSerializer(queryset, many=True)
+        return Response(serializer.data)
+
+class GroupDetailAPIViews(APIView):
+    permission_classes = (ReadOnly, )
+
+    def get_object(self, pk):
+        try:
+            return Group.objects.get(pk=pk)
+        except:
+            raise Http404
+
+    def get(self, request, pk):
+        student = self.get_object(pk)
+        serializer = GroupSerializer(student)
+        return Response(serializer.data)
+
+    def put(self, request, pk):
+        student = self.get_object(pk)
+        serializer = GroupSerializer(student, data=request.data)
         if serializer.is_valid():
             serializer.save()
             return Response(serializer.data)
