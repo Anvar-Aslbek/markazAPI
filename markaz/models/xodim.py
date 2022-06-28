@@ -1,5 +1,5 @@
 from django.db import models
-from django.contrib.auth.models import User
+from django.contrib.auth.models import AbstractUser
 from model_utils.fields import StatusField
 from model_utils import Choices
 
@@ -7,11 +7,11 @@ from model_utils import Choices
 from .roll import Roll
 
 
-class Employee(User):
-    phone = models.CharField(max_length=15)
-    birth_day = models.DateField()
+class Employee(AbstractUser):
+    phone = models.CharField(max_length=15, blank=True, null=True)
+    birth_day = models.DateField(blank=True, null=True)
     STATUS = Choices('Male','Female')
-    gender = StatusField()
+    gender = StatusField(blank=True, null=True)
     image = models.ImageField(upload_to='xodim/',null=True,blank=True)
     roll = models.ForeignKey('Roll',on_delete=models.SET_NULL,null=True)
 

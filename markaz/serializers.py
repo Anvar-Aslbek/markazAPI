@@ -52,10 +52,6 @@ class RoomSerializer(serializers.ModelSerializer):
         model = Room
         fields = '__all__'
 
-class StudentSerializer(serializers.ModelSerializer):
-    class Meta:
-        model = Student
-        fields = '__all__'
 
 class XarajatSerializer(serializers.ModelSerializer):
     class Meta:

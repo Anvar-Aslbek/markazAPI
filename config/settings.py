@@ -33,6 +33,8 @@ INSTALLED_APPS = [
 
     'markaz',
     'rest_framework',
+    'rest_framework.authtoken',
+    'dj_rest_auth',
 ]
 
 REST_FRAMEWORK = {
@@ -152,3 +154,4 @@ CORS_ALLOW_METHODS = [
     "PUT",
 ]
 
+AUTH_USER_MODEL ='markaz.Employee'
